@@ -26,7 +26,7 @@ with models.DAG(
 ) as dag:
 
     project_id = "velascoluis-dev-sandbox"
-    bucket_name = "velascoluis-dev-sandbox-bucket"
+    bucket_name = "us-central1-airline-compose-c26b5e81-bucket/dags"
     region = "us-central1"
     dataset_id = "airline"
     base_tables = {
