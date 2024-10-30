@@ -1,0 +1,4 @@
+booking_key,booking_date_key,customer_key,flight_key,booking_channel,booking_status,number_of_tickets,total_fare
+1,20240101,1,1,Online,Confirmed,2,500.00
+2,20240102,2,2,Phone,Cancelled,1,300.00
+3,20240103,3,3,Agency,Confirmed,4,1200.00

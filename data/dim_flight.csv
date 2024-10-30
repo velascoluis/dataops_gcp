@@ -1,0 +1,4 @@
+flight_key,flight_number,departure_airport_key,arrival_airport_key,scheduled_departure_time_key,scheduled_arrival_time_key,aircraft_key,distance
+1,AA123,1,2,1,5,1,2475.00
+2,BA456,3,1,2,7,2,3440.00
+3,DL789,2,4,3,10,3,5830.00

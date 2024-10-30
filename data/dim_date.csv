@@ -1,0 +1,8 @@
+date_key,date,day,month,year,day_of_week,day_name,month_name,quarter,year_month,is_weekend
+20240101,2024-01-01,1,1,2024,Monday,Monday,January,1,202401,false
+20240102,2024-01-02,2,1,2024,Tuesday,Tuesday,January,1,202401,false
+20240103,2024-01-03,3,1,2024,Wednesday,Wednesday,January,1,202401,false
+20240104,2024-01-04,4,1,2024,Thursday,Thursday,January,1,202401,false
+20240105,2024-01-05,5,1,2024,Friday,Friday,January,1,202401,false
+20240106,2024-01-06,6,1,2024,Saturday,Saturday,January,1,202401,true
+20240107,2024-01-07,7,1,2024,Sunday,Sunday,January,1,202401,true

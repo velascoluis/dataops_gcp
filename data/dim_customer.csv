@@ -1,0 +1,4 @@
+customer_key,customer_id,first_name,last_name,email,phone,date_of_birth,gender,address,city,country
+1,CUST001,John,Doe,john.doe@example.com,123-456-7890,1980-01-15,Male,123 Main St,Anytown,USA
+2,CUST002,Jane,Smith,jane.smith@example.com,987-654-3210,1975-05-20,Female,456 Oak Ave,Anycity,Canada
+3,CUST003,David,Lee,david.lee@example.com,555-123-4567,1992-11-08,Male,789 Pine Ln,Anyplace,UK

@@ -1,0 +1,4 @@
+flight_key,actual_departure_time_key,actual_arrival_time_key,departure_delay,arrival_delay,is_cancelled,is_diverted,fuel_consumption,passenger_count,baggage_count
+1,1,5,0,0,false,false,10000.00,350,700
+2,2,8,15,15,false,false,12000.00,480,960
+3,4,11,30,0,false,false,15000.00,250,500

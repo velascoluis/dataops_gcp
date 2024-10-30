@@ -1,0 +1,6 @@
+airport_key,airport_code,airport_name,city,country,latitude,longitude,time_zone
+1,JFK,John F. Kennedy International Airport,New York,USA,40.6413,-73.7781,America/New_York
+2,LAX,Los Angeles International Airport,Los Angeles,USA,33.9416,-118.4085,America/Los_Angeles
+3,LHR,Heathrow Airport,London,UK,51.4700,-0.4543,Europe/London
+4,CDG,Charles de Gaulle Airport,Paris,France,49.0097,2.5479,Europe/Paris
+5,SYD,Sydney Airport,Sydney,Australia,-33.9461,151.1772,Australia/Sydney
