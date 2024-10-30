@@ -48,7 +48,7 @@ def upload_dags_to_composer(
 
         for dag in dags:
             # Remove path to temp dir
-            dag = dag.replace(f"{temp_dir}/", name_replacement)
+            #dag = dag.replace(f"{temp_dir}/", name_replacement)
             print(f"dag: {dag}")
             try:
                 # Upload to your bucket
