@@ -1,10 +1,10 @@
 QUERY_STEP_1 = """
 SELECT
-    f.flight_key,
-    COALESCE(f.departure_delay, 0) + COALESCE(f.arrival_delay, 0) AS total_delay,
-    CASE WHEN COALESCE(f.departure_delay, 0) + COALESCE(f.arrival_delay, 0) <= 0 THEN 1 ELSE 0 END AS on_time_performance
+    flights.flight_key,
+    COALESCE(flights.departure_delay, 0) + COALESCE(flights.arrival_delay, 0) AS total_delay,
+    CASE WHEN COALESCE(flights.departure_delay, 0) + COALESCE(flights.arrival_delay, 0) <= 0 THEN 1 ELSE 0 END AS on_time_performance
 FROM
-    `{project_id}.{dataset_id}.{fact_flight_table}` AS f;"""
+    `{project_id}.{dataset_id}.{fact_flight_table}` AS flights;"""
 
 QUERY_STEP_2 = """
 SELECT
