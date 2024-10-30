@@ -22,7 +22,7 @@ def bigframes_step_1(project_id: str, dataset_id: str, fact_flight_table: str):
     import bigframes.pandas as bpd
     flights_df = bpd.read_gbq(f"{project_id}.{dataset_id}.{fact_flight_table}")
     flights_df["total_delay"] = flights_df["departure_delay"].fillna(0) + flights_df["arrival_delay"].fillna(0)
-    flights_df["on_time_performance"] = (flights_df["total_delay"] <= 0).astype(int)
+    flights_df["on_time_performance"] = (flights_df["total_delay"] <= 0).astype("Int64")
     flights_df.to_gbq(
         f"{project_id}.{dataset_id}.etl_step_1_delays_bigframes",
         if_exists="replace",
