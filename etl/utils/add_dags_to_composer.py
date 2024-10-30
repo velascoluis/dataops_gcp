@@ -38,7 +38,6 @@ def upload_dags_to_composer(
         name_replacement (str, optional): the name of the "dags/" subdirectory that will be used when constructing the temporary directory path name Defaults to "dags/".
     """
     temp_dir, dags = _create_dags_list(dags_directory)
-    print(f"dags: {dags}")
     if len(dags) > 0:
         # Note - the GCS client library does not currently support batch requests on uploads
         # if you have a large number of files, consider using
@@ -50,7 +49,7 @@ def upload_dags_to_composer(
         for dag in dags:
             # Remove path to temp dir
             dag = dag.replace(f"{temp_dir}/", name_replacement)
-
+            print(f"dag: {dag}")
             try:
                 # Upload to your bucket
                 blob = bucket.blob(dag)
