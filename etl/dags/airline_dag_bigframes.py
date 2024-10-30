@@ -17,13 +17,16 @@ default_args = {
     "start_date": YESTERDAY,
 }
 
- 
+
 def bigframes_step_1(project_id: str, dataset_id: str, fact_flight_table: str):
     import bigframes.pandas as bpd
     flights_df = bpd.read_gbq(f"{project_id}.{dataset_id}.{fact_flight_table}")
     flights_df["total_delay"] = flights_df["departure_delay"].fillna(0) + flights_df["arrival_delay"].fillna(0)
     flights_df["on_time_performance"] = (flights_df["total_delay"] <= 0).astype(int)
-    bpd.to_gbq(flights_df, f"{project_id}.{dataset_id}.etl_step_1_delays_bigframes", if_exists="replace")
+    flights_df.to_gbq(
+        f"{project_id}.{dataset_id}.etl_step_1_delays_bigframes",
+        if_exists="replace",
+    )
 
 
 def bigframes_step_2(project_id: str, dataset_id: str, dim_flight_table: str, dim_airport_table: str):
@@ -33,8 +36,11 @@ def bigframes_step_2(project_id: str, dataset_id: str, dim_flight_table: str, di
     airports_df = bpd.read_gbq(f"{project_id}.{dataset_id}.{dim_airport_table}")
     merged_df = delays_df.merge(flights_df, on='flight_key', how='inner')
     merged_df = merged_df.merge(airports_df, left_on='departure_airport_key', right_on='airport_key', how='inner')
-    result_df = merged_df[['total_delay', 'on_time_performance', 'airport_name']]
-    bpd.to_gbq(result_df, f"{project_id}.{dataset_id}.etl_step_2_flight_delays_with_airports_bigframes", if_exists="replace")
+    result_df = merged_df[["total_delay", "on_time_performance", "airport_name"]]
+    result_df.to_gbq(
+        f"{project_id}.{dataset_id}.etl_step_2_flight_delays_with_airports_bigframes",
+        if_exists="replace",
+    )
 
 
 def bigframes_step_3(project_id: str, dataset_id: str):
@@ -48,7 +54,10 @@ def bigframes_step_3(project_id: str, dataset_id: str):
         'total_delay': 'average_total_delay',
         'on_time_performance': 'on_time_percentage'
     })
-    bpd.to_gbq(result_df, f"{project_id}.{dataset_id}.etl_step_3_flight_delays_with_airports_bigframes", if_exists="replace")
+    result_df.to_gbq(
+        f"{project_id}.{dataset_id}.etl_step_3_flight_delays_with_airports_bigframes",
+        if_exists="replace",
+    )
 
 
 with models.DAG(
