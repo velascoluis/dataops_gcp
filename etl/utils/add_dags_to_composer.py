@@ -81,5 +81,5 @@ if __name__ == "__main__":
     )
 
     args = parser.parse_args()
-
+    print(args)
     upload_dags_to_composer(args.dags_directory, args.dags_bucket)
