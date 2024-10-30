@@ -67,20 +67,20 @@ with models.DAG(
     dim_flight_table = base_tables['dim_flight_table']
     dim_airport_table = base_tables['dim_airport_table']
 
-    formatted_query_1 = sql_queries.QUERY_STEP_1.format(
+    formatted_query_1 = QUERY_STEP_1.format(
         project_id=project_id,
         dataset_id=dataset_id,
         fact_flight_table=fact_flight_table
     )
 
-    formatted_query_2 = sql_queries.QUERY_STEP_2.format(
+    formatted_query_2 = QUERY_STEP_2.format(
         project_id=project_id,
         dataset_id=dataset_id,
         dim_flight_table=dim_flight_table,
         dim_airport_table=dim_airport_table
     )
 
-    formatted_query_3 = sql_queries.QUERY_STEP_3
+    formatted_query_3 = QUERY_STEP_3
 
     airline_etl_step_1 = BigQueryInsertJobOperator(
         task_id="airline_etl_step_1",
