@@ -50,7 +50,7 @@ def bigframes_step_3(project_id: str, dataset_id: str):
 
 
 with models.DAG(
-    "composer_airline_dag",
+    "composer_airline_dag_bigframes",
     catchup=False,
     default_args=default_args,
     schedule_interval=datetime.timedelta(days=1),

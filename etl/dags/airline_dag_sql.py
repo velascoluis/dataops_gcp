@@ -19,12 +19,12 @@ default_args = {
 
 
 with models.DAG(
-    "composer_airline_dag",
-    "catchup=False",
+    "composer_airline_dag_sql",
+    catchup=False,
     default_args=default_args,
     schedule_interval=datetime.timedelta(days=1),
 ) as dag:
-    
+
     project_id = "velascoluis-dev-sandbox"
     dataset_id = "airline"
     base_tables = {
@@ -112,7 +112,7 @@ with models.DAG(
             }
         },
     )
-  
+
     airline_etl_step_3 = BigQueryInsertJobOperator(
         task_id="airline_etl_step_3",
         configuration={
