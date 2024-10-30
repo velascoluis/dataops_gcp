@@ -57,7 +57,7 @@ def upload_dags_to_composer(
                 # Upload to your bucket with the correct destination path
                 blob = bucket.blob(destination_path)
                 blob.upload_from_filename(dag)
-                print(f"File {dag} uploaded to {bucket_name}/{destination_path}.")
+                print(f"File {dag_filename} uploaded to {bucket_name}/{destination_path}.")
             except FileNotFoundError:
                 current_directory = os.listdir()
                 print(
