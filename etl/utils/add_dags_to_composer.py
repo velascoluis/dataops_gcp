@@ -47,14 +47,17 @@ def upload_dags_to_composer(
         bucket = storage_client.bucket(bucket_name)
 
         for dag in dags:
-            # Remove path to temp dir
-            #dag = dag.replace(f"{temp_dir}/", name_replacement)
-            print(f"dag: {dag}")
+            # Get just the filename from the full path
+            dag_filename = os.path.basename(dag)
+            # Construct the destination path in GCS (dags/filename.py)
+            destination_path = os.path.join(name_replacement, dag_filename)
+            
+            print(f"Uploading {dag} to {destination_path}")
             try:
-                # Upload to your bucket
-                blob = bucket.blob(dag)
+                # Upload to your bucket with the correct destination path
+                blob = bucket.blob(destination_path)
                 blob.upload_from_filename(dag)
-                print(f"File {dag} uploaded to {bucket_name}/{dag}.")
+                print(f"File {dag} uploaded to {bucket_name}/{destination_path}.")
             except FileNotFoundError:
                 current_directory = os.listdir()
                 print(
