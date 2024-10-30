@@ -1,4 +1,3 @@
-
 import datetime
 
 from airflow import models
@@ -25,6 +24,7 @@ with models.DAG(
     default_args=default_args,
     schedule_interval=datetime.timedelta(days=1),
 ) as dag:
+    
     project_id = "velascoluis-dev-sandbox"
     dataset_id = "airline"
     base_tables = {
@@ -36,12 +36,27 @@ with models.DAG(
     fact_flight_table = base_tables['fact_flight_table']
     dim_flight_table = base_tables['dim_flight_table']
     dim_airport_table = base_tables['dim_airport_table']
- 
+
+    formatted_query_1 = sql_queries.QUERY_STEP_1.format(
+        project_id=project_id,
+        dataset_id=dataset_id,
+        fact_flight_table=fact_flight_table
+    )
+
+    formatted_query_2 = sql_queries.QUERY_STEP_2.format(
+        project_id=project_id,
+        dataset_id=dataset_id,
+        dim_flight_table=dim_flight_table,
+        dim_airport_table=dim_airport_table
+    )
+
+    formatted_query_3 = sql_queries.QUERY_STEP_3
+
     airline_etl_step_1 = BigQueryInsertJobOperator(
         task_id="airline_etl_step_1",
         configuration={
             "query": {
-                "query": sql_queries.QUERY_STEP_1,
+                "query": formatted_query_1,
                 "useLegacySql": False,
                 "writeDisposition": "WRITE_TRUNCATE",
                 'destinationTable': {
@@ -56,7 +71,7 @@ with models.DAG(
         task_id="airline_etl_step_2",
         configuration={
             "query": {
-                "query": sql_queries.QUERY_STEP_2,
+                "query": formatted_query_2,
                 "useLegacySql": False,
                 "writeDisposition": "WRITE_TRUNCATE",
                 'destinationTable': {
@@ -72,7 +87,7 @@ with models.DAG(
         task_id="airline_etl_step_3",
         configuration={
             "query": {
-                "query": sql_queries.QUERY_STEP_3,
+                "query": formatted_query_3,
                 "useLegacySql": False,
                 "writeDisposition": "WRITE_TRUNCATE",
                 'destinationTable': {

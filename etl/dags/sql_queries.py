@@ -1,4 +1,4 @@
-QUERY_STEP_1 = f"""
+QUERY_STEP_1 = """
 SELECT
     flights.flight_key,
     COALESCE(flights.departure_delay, 0) + COALESCE(flights.arrival_delay, 0) AS total_delay,
@@ -6,7 +6,7 @@ SELECT
 FROM
     `{project_id}.{dataset_id}.{fact_flight_table}` AS flights;"""
 
-QUERY_STEP_2 = f"""
+QUERY_STEP_2 = """
 SELECT
     d.total_delay,
     d.on_time_performance,
@@ -18,7 +18,7 @@ JOIN
 JOIN
    `{project_id}.{dataset_id}.{dim_airport_table}` AS a ON df.departure_airport_key = a.airport_key;"""
 
-QUERY_STEP_3 = f"""
+QUERY_STEP_3 = """
 SELECT
     a.airport_name,
     AVG(a.total_delay) AS average_total_delay,
