@@ -45,7 +45,7 @@ with models.DAG(
     SELECT
         delays.total_delay,
         delays.on_time_performance,
-        delays.airport_name
+        a.airport_name
     FROM
         airline.etl_step_1_delays_sql AS delays
     JOIN
