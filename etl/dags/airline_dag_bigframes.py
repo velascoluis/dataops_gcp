@@ -20,7 +20,7 @@ default_args = {
 
 def bigframes_step_1(project_id: str, dataset_id: str, fact_flight_table: str):
     import bigframes.pandas as bpd
-    flights_df = bpd.read_gbq(f"{project_id}.{dataset_id}.{fact_flight_table}")
+    flights_df = bpd.read_gbq(f"select * from {project_id}.{dataset_id}.{fact_flight_table}")
     flights_df["total_delay"] = flights_df["departure_delay"].fillna(0) + flights_df["arrival_delay"].fillna(0)
     flights_df["on_time_performance"] = (flights_df["total_delay"] <= 0).astype("Int64")
     flights_df.to_gbq(
@@ -31,9 +31,9 @@ def bigframes_step_1(project_id: str, dataset_id: str, fact_flight_table: str):
 
 def bigframes_step_2(project_id: str, dataset_id: str, dim_flight_table: str, dim_airport_table: str):
     import bigframes.pandas as bpd
-    delays_df = bpd.read_gbq(f"{project_id}.{dataset_id}.etl_step_1_delays_bigframes")
-    flights_df = bpd.read_gbq(f"{project_id}.{dataset_id}.{dim_flight_table}")
-    airports_df = bpd.read_gbq(f"{project_id}.{dataset_id}.{dim_airport_table}")
+    delays_df = bpd.read_gbq(f"select * from {project_id}.{dataset_id}.etl_step_1_delays_bigframes")
+    flights_df = bpd.read_gbq(f"select * from {project_id}.{dataset_id}.{dim_flight_table}")
+    airports_df = bpd.read_gbq(f"select * from {project_id}.{dataset_id}.{dim_airport_table}")
     merged_df = delays_df.merge(flights_df, on='flight_key', how='inner')
     merged_df = merged_df.merge(airports_df, left_on='departure_airport_key', right_on='airport_key', how='inner')
     result_df = merged_df[["total_delay", "on_time_performance", "airport_name"]]
@@ -45,7 +45,7 @@ def bigframes_step_2(project_id: str, dataset_id: str, dim_flight_table: str, di
 
 def bigframes_step_3(project_id: str, dataset_id: str):
     import bigframes.pandas as bpd
-    df = bpd.read_gbq(f"{project_id}.{dataset_id}.etl_step_2_flight_delays_with_airports_bigframes")
+    df = bpd.read_gbq(f"select * from {project_id}.{dataset_id}.etl_step_2_flight_delays_with_airports_bigframes")
     result_df = df.groupby('airport_name').agg({
         'total_delay': 'mean',
         'on_time_performance': 'mean'
