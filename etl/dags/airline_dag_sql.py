@@ -43,13 +43,13 @@ with models.DAG(
 
     QUERY_STEP_2 = """
     SELECT
-        d.total_delay,
-        d.on_time_performance,
-        a.airport_name
+        delays.total_delay,
+        delays.on_time_performance,
+        delays.airport_name
     FROM
-        airline.etl_step_1_delays_sql AS d
+        airline.etl_step_1_delays_sql AS delays
     JOIN
-        `{project_id}.{dataset_id}.{dim_flight_table}` AS df ON d.flight_key = df.flight_key
+        `{project_id}.{dataset_id}.{dim_flight_table}` AS df ON delays.flight_key = df.flight_key
     JOIN
     `{project_id}.{dataset_id}.{dim_airport_table}` AS a ON df.departure_airport_key = a.airport_key;"""
 
