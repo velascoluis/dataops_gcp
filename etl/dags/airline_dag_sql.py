@@ -53,6 +53,7 @@ with models.DAG(
     JOIN
     `{project_id}.{dataset_id}.{dim_airport_table}` AS a ON df.departure_airport_key = a.airport_key;"""
 
+
     QUERY_STEP_3 = """
     SELECT
         a.airport_name,
