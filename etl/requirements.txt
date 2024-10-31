@@ -1,2 +1,5 @@
 google-cloud-bigquery==3.20.1
 bigframes==1.25.0
+# be sure to update the constraints file to match
+# see https://airflow.apache.org/docs/apache-airflow/stable/installation/installing-from-pypi.html#constraints-files
+apache-airflow==2.9.3
