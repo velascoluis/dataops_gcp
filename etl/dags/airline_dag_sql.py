@@ -32,7 +32,7 @@ with models.DAG(
         'dim_flight_table': "dim_flight",
         'dim_airport_table': "dim_airport"
     }
-
+    #Calculate on time performancem metric as a boolean
     QUERY_STEP_1 = """
     SELECT
         flights.flight_key,
