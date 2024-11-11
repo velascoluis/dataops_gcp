@@ -50,7 +50,6 @@ with models.DAG(
         airline.etl_step_1_delays_sql AS delays
     JOIN
         `{project_id}.{dataset_id}.{dim_flight_table}` AS df ON delays.flight_key = df.flight_key
-        `{project_id}.{dataset_id}.{dim_flight_table}` AS df ON delays.flight_key = df.flight_key
     JOIN
     `{project_id}.{dataset_id}.{dim_airport_table}` AS a ON df.departure_airport_key = a.airport_key;"""
 
