@@ -68,7 +68,7 @@ def step2_join_airports(spark, project_id, dataset_id):
         .option('table', f'{project_id}.{dataset_id}.etl_step_2_flight_delays_with_airports_sql') \
         .mode('overwrite') \
         .save()
-
+#Calculate metrics
 def step3_calculate_metrics(spark, project_id, dataset_id):
     """Calculate average delays and on-time performance by airport"""
     
