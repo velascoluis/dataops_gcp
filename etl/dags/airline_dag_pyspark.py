@@ -34,7 +34,7 @@ with models.DAG(
         "dim_flight_table": "dim_flight",
         "dim_airport_table": "dim_airport",
     }
-
+    #step 1
     airline_etl_step_1 = DataprocCreateBatchOperator(
         task_id="airline_etl_step_1",
         project_id=project_id,
@@ -50,6 +50,7 @@ with models.DAG(
             },
         },
     )
+     #step 2
     airline_etl_step_2 = DataprocCreateBatchOperator(
         task_id="airline_etl_step_2",
         project_id=project_id,
@@ -65,7 +66,7 @@ with models.DAG(
             },
         },
     )
-
+     #step 3
     airline_etl_step_3 = DataprocCreateBatchOperator(
         task_id="airline_etl_step_3",
         project_id=project_id,
