@@ -17,7 +17,7 @@ default_args = {
     "start_date": YESTERDAY,
 }
 
-
+#Step 1
 def bigframes_step_1(project_id: str, dataset_id: str, fact_flight_table: str):
     import bigframes.pandas as bpd
     flights_df = bpd.read_gbq(f"select * from {project_id}.{dataset_id}.{fact_flight_table}")
@@ -28,7 +28,7 @@ def bigframes_step_1(project_id: str, dataset_id: str, fact_flight_table: str):
         if_exists="replace",
     )
 
-
+#Step 2
 def bigframes_step_2(project_id: str, dataset_id: str, dim_flight_table: str, dim_airport_table: str):
     import bigframes.pandas as bpd
     delays_df = bpd.read_gbq(f"select * from {project_id}.{dataset_id}.etl_step_1_delays_bigframes")
@@ -42,7 +42,7 @@ def bigframes_step_2(project_id: str, dataset_id: str, dim_flight_table: str, di
         if_exists="replace",
     )
 
-
+#Step 3
 def bigframes_step_3(project_id: str, dataset_id: str):
     import bigframes.pandas as bpd
     df = bpd.read_gbq(f"select * from {project_id}.{dataset_id}.etl_step_2_flight_delays_with_airports_bigframes")
